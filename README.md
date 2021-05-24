@@ -1,11 +1,11 @@
-# C# Console / Web Applications App01 to App05
+# C# Console / App01 to App05
 | Author | Details |
 | ---- | ---- |
-**Name**: | Phill Horrocks  |
-**Student ID**: | 22027767 |
-**Course:** | Computing |
+**Name**: | Khayre Abdala  |
+**Student ID**: | 21807081 |
+**Course:** | computer |
 **Module**: | CO453     |
-**Started**: | January 2021 |    
+**Started**: | 2021 |    
 
 1. App01: Distance Converter
 2. App02: BMI Calculator

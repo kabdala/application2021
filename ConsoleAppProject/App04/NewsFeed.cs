@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-
-
 namespace ConsoleAppProject.App04
 {
     ///<summary>
@@ -17,62 +15,137 @@ namespace ConsoleAppProject.App04
     ///<author>
     ///  Michael Kölling and David J. Barnes
     ///  version 0.1
+    ///  Edited by Phill Horrocks
+    ///  Date: 26/03/21
     ///</author> 
     public class NewsFeed
     {
-        private readonly List<MessagePost> messages;
-        private readonly List<PhotoPost> photos;
+        public const string author = "Phill"; // Testing by setting constant variable
+        private readonly List<Post> posts;
 
         ///<summary>
         /// Construct an empty news feed.
         ///</summary>
         public NewsFeed()
         {
-            messages = new List<MessagePost>();
-            photos = new List<PhotoPost>();
-        }
+            posts = new List<Post>();
 
+            // Testing by placing a message post and a photo post
+            //MessagePost post = new MessagePost(author, "Hello world! You are awesome");
+            //AddMessagePost(post);
+
+            //PhotoPost photoPost = new PhotoPost(author, "pic1.jpg", "Me and my dogs!");
+            //AddPhotoPost(photoPost);
+        }
 
         ///<summary>
         /// Add a text post to the news feed.
-        /// 
-        /// @param text  The text post to be added.
         ///</summary>
         public void AddMessagePost(MessagePost message)
         {
-            messages.Add(message);
+            posts.Add(message);
         }
 
         ///<summary>
         /// Add a photo post to the news feed.
-        /// 
-        /// @param photo  The photo post to be added.
         ///</summary>
         public void AddPhotoPost(PhotoPost photo)
         {
-            photos.Add(photo);
+            posts.Add(photo);
+        }
+
+        /// <summary>
+        /// Remove a post from the news feed.
+        /// Check to see if the post exists; if it does, execute the Remove
+        /// method. If it does not exist, show an error message
+        /// </summary>
+        public void RemovePost(int id)
+        {
+            Post post = FindPost(id);
+            if (post == null)
+            {
+                Console.WriteLine($"\nPost with ID number {id} doesn not exist");
+            }
+            else
+            {
+                Console.WriteLine($"\nPost ID {id} has been sucessfully removed");
+                posts.Remove(post);
+                //post.Display();
+            }
+        }
+
+        public void AddComment(int id, string comment)
+        {
+            Post post = FindPost(id);
+            if (post == null)
+            {
+                Console.WriteLine($"\nPost with ID number {id} doesn not exist");
+            }
+            else
+            {
+                Console.WriteLine($"\nComment added to post ID {id}");
+                post.AddComment(comment);
+
+            }
+        }
+
+        public void AddLike(int id)
+        {
+            Post post = FindPost(id);
+            if (post == null)
+            {
+                Console.WriteLine($"\nPost with ID number {id} doesn not exist");
+            }
+            else
+            {
+                Console.WriteLine($"\nLike added to post ID {id}");
+            }
+            post.Like();
+        }
+
+        public void UnlikePost(int id)
+        {
+            Post post = FindPost(id);
+            if (post == null)
+            {
+                Console.WriteLine($"\nPost with ID number {id} doesn not exist");
+            }
+            else
+            {
+                Console.WriteLine($"\nUnliked post ID {id}");
+            }
+            post.Unlike();
         }
 
         ///<summary>
         /// Show the news feed. Currently: print the news feed details to the
-        /// terminal. (To do: replace this later with display in web browser.)
+        /// terminal. (TODO: replace this later with display in web browser.)
         ///</summary>
         public void Display()
         {
-            // display all text posts
-            foreach (MessagePost message in messages)
+            foreach (Post post in posts)
             {
-                message.Display();
-                Console.WriteLine();   // empty line between posts
-            }
-
-            // display all photos
-            foreach (PhotoPost photo in photos)
-            {
-                photo.Display();
-                Console.WriteLine();   // empty line between posts
+                post.Display();
+                Console.WriteLine("\n---------------------------------------------\n");
             }
         }
+
+        /// <summary>
+        /// Locate a specific post ID within the posts by trying to
+        /// match the ID passed to an ID already in the system
+        /// </summary>
+        public Post FindPost(int id)
+        {
+            foreach (Post post in posts)
+            {
+                if (post.PostID == id)
+                {
+                    return post;
+                }
+            }
+            return null;
+        }
+        
     }
 
 }

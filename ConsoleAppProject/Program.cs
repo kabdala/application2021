@@ -1,35 +1,60 @@
-﻿using ConsoleAppProject.App03;
-using ConsoleAppProject.Helpers;
+﻿using ConsoleAppProject.App01;
+using ConsoleAppProject.App02;
+using ConsoleAppProject.App03;
+using ConsoleAppProject.App04;
 using System;
+using ConsoleAppProject.Helpers;
 
 namespace ConsoleAppProject
 {
     /// <summary>
     /// The main method in this class is called first
     /// when the application is started.  It will be used
-    /// to start Apps 01 to 05 for CO453 CW1
+    /// to start Apps 01 to 04 for CO453 CW1
     /// 
     /// This Project has been modified by:
-    /// Derek Peacock 14/12/2020
+    /// Phill Horrocks 25/03/21
     /// </summary>
     public static class Program
     {
         public static void Main(string[] args)
         {
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            
-            Console.WriteLine("BNU CO453 Applications Programming 2020-2021!");
-            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Blue;
 
-            // Using an extension method for each enumeration
-            Console.WriteLine("Using MyEnum Extension Method!\n");
-            Console.WriteLine("MyEnum Value = " + MyEnum.FirstValue);
-            Console.WriteLine("MyEnum Friendly Value = " + MyEnum.FirstValue.EnumValue());
-            Console.WriteLine();
+            ConsoleHelper.OutputHeading("CO453 C# Programming - MAIN MENU", 0.2);
+            string[] choices = {
+                "APP01: Distance Converter",
+                "APP02: BMI Calculator",
+                "APP03: Student Grades System",
+                "APP04: Social Network"
+            };
+            int choice = ConsoleHelper.SelectChoice(choices);
 
-            // Using an extension method for any enumeration
-            StudentGrades grades = new StudentGrades();
-            grades.TestGradesEnumeration();
+            if (choice == 1)
+            {
+                DistanceConverter converter = new DistanceConverter();
+                converter.ConvertDistance();
+            }
+            if (choice == 2)
+            {
+                BMI bmi = new BMI();
+                bmi.MainMenu();
+            }
+            if (choice == 3)
+            {
+                StudentGrades studentGrades = new StudentGrades();
+                studentGrades.OutputHeading();
+            }
+            if (choice == 4)
+            {
+                NetworkApp networkApp = new NetworkApp();
+                networkApp.DisplayMenu();
+            }
+            else
+            {
+                Console.WriteLine("Please make your choice");
+            }
+
         }
     }
 }
